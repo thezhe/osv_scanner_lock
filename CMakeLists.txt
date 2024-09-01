@@ -7,8 +7,17 @@ function(thezhe_osv_scanner_lock errorMessage)
     set(filename "osv-scanner.json")
     # Reconfigure on change
     configure_file("${filename}" ".cache/thezhe/osv_scanner_lock" COPYONLY)
+    execute_process(
+        COMMAND osv-scanner -v
+        RESULT_VARIABLE osv_scanner_missing
+        OUTPUT_QUIET ERROR_QUIET)
+    if(osv_scanner_missing)
+        message(
+            WARNING "thezhe_osv_scanner_lock: Cannot find osv-scanner command"
+                    ", skipping scan")
+    endif()
     # Scan
-    if(PROJECT_IS_TOP_LEVEL)
+    if(PROJECT_IS_TOP_LEVEL AND NOT osv_scanner_missing)
         execute_process(
             COMMAND osv-scanner --lockfile osv-scanner:osv-scanner.json
             WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
@@ -51,5 +60,5 @@ endif()
 thezhe_osv_scanner_lock(error_message)
 message(STATUS "thezhe_osv_scanner_lock: ${error_message}")
 if(NOT error_message)
-    message(FATAL_ERROR "thezhe_osv_scanner_lock: Failing test did not fail.")
+    message(FATAL_ERROR "thezhe_osv_scanner_lock: Failing test did not fail")
 endif()
