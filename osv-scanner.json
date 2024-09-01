@@ -4,8 +4,8 @@
             "packages": [
                 {
                     "package": {
-                        "name": "github.com/juce-framework/JUCE",
-                        "commit": "6eac100a794d78ddc6ec3f9921a3d8bea8a9670c"
+                        "name": "github.com/thezhe/templatelists",
+                        "commit": "ff0152dc61a91bfbbad6cbde449863c5ce390320"
                     }
                 }
             ]

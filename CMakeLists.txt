@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 include(FetchContent)
 project("thezhe/osv_scanner_lock")
 # Fetch content using `osv-scanner.json`
-function(thezhe_osv_scanner_lock errorMessage)
+function(thezhe_osv_scanner_lock)
     set(filename "osv-scanner.json")
     # Reconfigure on change
     configure_file("${filename}" ".cache/thezhe/osv_scanner_lock" COPYONLY)
@@ -26,10 +26,7 @@ function(thezhe_osv_scanner_lock errorMessage)
             ERROR_VARIABLE output
             OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE)
         if(NOT result EQUAL 0)
-            set(${errorMessage}
-                "${output}"
-                PARENT_SCOPE)
-            return()
+            message(FATAL_ERROR "thezhe_osv_scanner_lock: ${output}")
         endif()
     endif()
     # Populate content
@@ -57,8 +54,5 @@ endfunction()
 if(NOT PROJECT_IS_TOP_LEVEL)
     return()
 endif()
-thezhe_osv_scanner_lock(error_message)
-message(STATUS "thezhe_osv_scanner_lock: ${error_message}")
-if(NOT error_message)
-    message(FATAL_ERROR "thezhe_osv_scanner_lock: Failing test did not fail")
-endif()
+thezhe_osv_scanner_lock()
+thezhe_templatelists()
