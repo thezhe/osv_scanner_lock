@@ -7,6 +7,7 @@ function(thezhe_osv_scanner_lock)
     set(filename "osv-scanner.json")
     # Reconfigure on change
     configure_file("${filename}" ".cache/thezhe/osv_scanner_lock" COPYONLY)
+    # Validate osv-scanner
     execute_process(
         COMMAND osv-scanner -v
         RESULT_VARIABLE osv_scanner_missing
@@ -40,7 +41,7 @@ function(thezhe_osv_scanner_lock)
         string(JSON name GET "${package}" "name")
         string(JSON commit GET "${package}" "commit")
         string(CONCAT git_repository "https://" "${name}" ".git")
-        cmake_path(GET name STEM LAST_ONLY repo_name)
+        cmake_path(GET name FILENAME repo_name)
         message(STATUS "thezhe_osv_scanner_lock: Fetching \"${repo_name}\"")
         FetchContent_Declare(
             "${repo_name}"
