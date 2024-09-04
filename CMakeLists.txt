@@ -2,7 +2,19 @@ include_guard(GLOBAL)
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 include(FetchContent)
 project("thezhe/osv_scanner_lock")
-# Fetch content using `osv-scanner.json`
+#[[
+Run osv-scanner on `${CMAKE_CURRENT_SOURCE_DIR}`/osv-scanner.json
+if `${PROJECT_IS_TOP_LEVEL}` is `TRUE` and osv-scanner exists. Then,
+populate content using osv-scanner.json.
+Pre:
+- `${CMAKE_CURRENT_SOURCE_DIR}`/osv-scanner.json exists
+- Package names do not include an "http(s)://" prefix or a ".git" suffix
+Errors:
+- osv-scanner exit code is not 0 (vulnerability found)
+- Content did not populate
+Post:
+- All content from osv-scanner.json populated (shallow clone)
+]]
 function(thezhe_osv_scanner_lock)
     set(filename "osv-scanner.json")
     # Reconfigure on change

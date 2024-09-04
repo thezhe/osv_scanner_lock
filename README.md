@@ -4,8 +4,8 @@
 
 ## Features
 
-- Runs `osv-scanner --lockfile osv-scanner:osv-scanner.json` if [`PROJECT_IS_TOP_LEVEL`](https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html) is `TRUE`
-- Populates content using CMake project repos and commit hashes
+- Runs `osv-scanner --lockfile osv-scanner:osv-scanner.json` if [`PROJECT_IS_TOP_LEVEL`](https://cmake.org/cmake/help/latest/variable/PROJECT_IS_TOP_LEVEL.html) is `TRUE` and `osv-scanner` exists
+- Populates content (shallow clone) using repo(s) and commit hash(es) from `osv-scanner.json`
 
 ## Versioning
 
