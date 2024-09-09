@@ -18,7 +18,9 @@ Post:
 function(thezhe_osv_scanner_lock)
     set(filename "osv-scanner.json")
     # Reconfigure on change
-    configure_file("${filename}" ".cache/thezhe/osv_scanner_lock" COPYONLY)
+    configure_file(
+        "${filename}"
+        "${CMAKE_CURRENT_BINARY_DIR}/.cache/thezhe/osv_scanner_lock" COPYONLY)
     # Validate osv-scanner
     execute_process(
         COMMAND osv-scanner -v
