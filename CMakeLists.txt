@@ -33,7 +33,7 @@ function(thezhe_osv_scanner_lock)
     if(PROJECT_IS_TOP_LEVEL AND NOT osv_scanner_missing)
         execute_process(
             COMMAND osv-scanner --lockfile osv-scanner:osv-scanner.json
-            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+            WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
             RESULT_VARIABLE result
             OUTPUT_VARIABLE output
             ERROR_VARIABLE output
