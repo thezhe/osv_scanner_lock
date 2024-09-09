@@ -21,18 +21,8 @@ function(thezhe_osv_scanner_lock)
     configure_file(
         "${filename}"
         "${CMAKE_CURRENT_BINARY_DIR}/.cache/thezhe/osv_scanner_lock" COPYONLY)
-    # Validate osv-scanner
-    execute_process(
-        COMMAND osv-scanner -v
-        RESULT_VARIABLE osv_scanner_missing
-        OUTPUT_QUIET ERROR_QUIET)
-    if(osv_scanner_missing)
-        message(
-            WARNING "thezhe_osv_scanner_lock: Cannot find osv-scanner command"
-                    ", skipping scan")
-    endif()
     # Scan
-    if(PROJECT_IS_TOP_LEVEL AND NOT osv_scanner_missing)
+    if(PROJECT_IS_TOP_LEVEL)
         execute_process(
             COMMAND osv-scanner --lockfile osv-scanner:osv-scanner.json
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
