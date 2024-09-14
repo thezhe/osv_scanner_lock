@@ -23,6 +23,8 @@ function(thezhe_osv_scanner_lock)
         "${CMAKE_CURRENT_BINARY_DIR}/.cache/thezhe/osv_scanner_lock" COPYONLY)
     # Scan
     if(PROJECT_IS_TOP_LEVEL)
+        message(STATUS "thezhe_osv_scanner_lock: Scanning"
+                       "${CMAKE_CURRENT_SOURCE_DIR}/osv-scanner.json")
         execute_process(
             COMMAND osv-scanner --lockfile osv-scanner:osv-scanner.json
             WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
